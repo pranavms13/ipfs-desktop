@@ -1,11 +1,13 @@
 import { screen, BrowserWindow, ipcMain, app, session } from 'electron'
 import { join } from 'path'
 import { URL } from 'url'
+import toUri from 'multiaddr-to-uri'
 import serve from 'electron-serve'
 import openExternal from './open-external'
 import logger from '../common/logger'
 import store from '../common/store'
 import dock from '../dock'
+import { VERSION } from '../common/consts'
 
 serve({ scheme: 'webui', directory: join(__dirname, '../../assets/webui') })
 
@@ -58,6 +60,16 @@ const createWindow = () => {
   return window
 }
 
+// Converts a Multiaddr to a valid value for Origin HTTP header
+const apiOrigin = (apiMultiaddr) => {
+  // Return opaque origin when there is no API yet
+  // https://html.spec.whatwg.org/multipage/origin.html#concept-origin-opaque
+  if (!apiMultiaddr) return 'null'
+  // Return the Origin of HTTP API
+  const apiUri = toUri(apiMultiaddr, { assumeHttp: true })
+  return new URL(apiUri).origin
+}
+
 export default async function (ctx) {
   openExternal()
 
@@ -105,7 +117,9 @@ export default async function (ctx) {
   })
 
   session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
-    delete details.requestHeaders.Origin
+    // Avoid setting CORS by acting like /webui loaded from API port
+    details.requestHeaders.Origin = apiOrigin(apiAddress)
+    details.requestHeaders['User-Agent'] = `ipfs-desktop/${VERSION}`
     callback({ cancel: false, requestHeaders: details.requestHeaders }) // eslint-disable-line
   })
 
