@@ -61,7 +61,7 @@ async function downloadHash (ctx) {
   } catch (_) {
     showDialog({
       title: i18n.t('cantResolveCidDialog.title'),
-      message: i18n.t('cantResolveCidDialog.message', { path }),
+      message: i18n.t('cantResolveCidDialog.message', { path: cid }),
       buttons: [i18n.t('close')]
     })
 

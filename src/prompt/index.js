@@ -7,7 +7,7 @@ const getId = () => crypto.randomBytes(16).toString('hex')
 const isInverse = IS_MAC
 
 function generatePage ({ title, message, placeholder = '', buttons }, id) {
-  buttons = buttons.map((txt, i) => `<button id="${i}">${txt}</button>`)
+  buttons = buttons.map((txt, i) => `<button ${i === 0 ? 'class="default"' : ''} id="${i}">${txt}</button>`)
 
   if (isInverse) {
     buttons.reverse()
@@ -17,7 +17,7 @@ function generatePage ({ title, message, placeholder = '', buttons }, id) {
 <html>
   <body>
     <p style="margin: 0">${message}</p>
-    <input type="text" value="${placeholder}" />
+    <input type="text" value="${placeholder}" placeholder="Type..." />
     <div id="buttons">${buttons.join('\n')}</div>
   </body>
   <style>
@@ -65,7 +65,7 @@ function generatePage ({ title, message, placeholder = '', buttons }, id) {
     margin-left: 0.5rem;
     padding: 0.25rem 0.5rem;
   }
-  button:last-of-type {
+  button.default {
     background: #0b3a53;
   }
   @media (prefers-color-scheme: dark) {
@@ -86,6 +86,13 @@ function generatePage ({ title, message, placeholder = '', buttons }, id) {
         })
       })
     }
+
+    document.querySelector('input').addEventListener('keypress', (event) => {
+      if (event.keyCode == 13) {
+        event.preventDefault()
+        document.querySelector('button.default').click()
+      }
+    })
   </script>
 </html>`
 
@@ -107,11 +114,11 @@ module.exports = async function showPrompt (options) {
 
   return new Promise(resolve => {
     ipcMain.once(id, (_, data) => {
-      window.close()
+      window.destroy()
       resolve(data)
     })
 
-    window.on('closed', () => {
+    window.on('close', () => {
       resolve({ input: '', button: null })
     })
 
