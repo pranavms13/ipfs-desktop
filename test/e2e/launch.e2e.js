@@ -59,7 +59,7 @@ describe('Application launch', function () {
     // As a workaround, we look at console output and match on strings :<
     const tick = 250
     const ready = (output) => output && output.match(/(?:daemon is running|Daemon is ready|start daemon FINISHED)/)
-    const hasPeerId = (output) => output && output.match(/PeerID is (\w+)$/)
+    const hasPeerId = (output) => output && output.trim().match(/PeerID is (\w+)$/)
     let peerId
     while (true) {
       const logs = await app.client.getMainProcessLogs()
