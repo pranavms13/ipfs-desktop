@@ -25,12 +25,6 @@
   "errorwhileTakingScreenshot": "An error occurred while taking the screenshot.",
   "clickToOpenLogs": "Click here to open the logs.",
   "ipfsNotRunning": "IPFS is not running",
-  "cantDownloadHash": "Could not download hash",
-  "invalidHashClipboard": "The hash on the clipboard is not valid.",
-  "errorWhileDownloadingHash": "An error occurred while getting the hash.",
-  "errorWhileWritingFiles": "An error occurred while writing the files to your file system.",
-  "hashDownloaded": "Hash downloaded",
-  "hashDownloadedClickToView": "Hash { hash } content downloaded. Click to view.",
   "checkForUpdates": "Check for Updates...",
   "yes": "Yes",
   "no": "No",
@@ -41,7 +35,7 @@
   "restartIpfsDesktop": "Restart IPFS Desktop",
   "openLogs": "Open logs",
   "takeScreenshot": "Take Screenshot",
-  "downloadHash": "Download Hash",
+  "downloadHash": "Download CID",
   "moveRepositoryLocation": "Move Repository Location",
   "runGarbageCollector": "Run Garbage Collector",
   "polkitDialog": {
@@ -149,5 +143,27 @@
   "cantAddIpfsToPath": {
     "title": "IPFS on PATH",
     "message": "Could not add IPFS to the PATH."
+  },
+  "downloadCidContentDialog": {
+    "title": "Download",
+    "message": "Type down a CID, IPFS or IPNS path whose contents you want to download.",
+    "action": "Download"
+  },
+  "cantResolveCidDialog": {
+    "title": "Could not resolve",
+    "message": "The given path ({ path }) could not be resolved."
+  },
+  "couldNotGetCidDialog": {
+    "title": "Could not fetch path",
+    "message": "The given path ({ path }) could not be fetched."
+  },
+  "contentsSavedDialog": {
+    "title": "Contents saved",
+    "message": "The contents from the given path ({ path }) were successfully saved.",
+    "action": "See Files"
+  },
+  "couldNotSaveDialog": {
+    "title": "Could not write to disk",
+    "message": "There was an error writing to the disk. Please try again."
   }
 }
