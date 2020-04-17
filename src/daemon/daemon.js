@@ -3,7 +3,7 @@ const i18n = require('i18next')
 const { execFileSync } = require('child_process')
 const { showDialog } = require('../dialogs')
 const logger = require('../common/logger')
-const { applyDefaults, checkCorsConfig, checkPorts, configExists } = require('./config')
+const { applyDefaults, checkCorsConfig, checkPorts, configExists, apiFileExists } = require('./config')
 
 function cannotConnectDialog (addr) {
   showDialog({
@@ -63,7 +63,13 @@ async function spawn ({ flags, path, keysize }) {
   // NOTE: https://github.com/ipfs/js-ipfsd-ctl/issues/500
   if (configExists(ipfsd)) {
     checkCorsConfig(ipfsd)
-    return ipfsd
+    return { ipfsd, isRemote: false }
+  }
+
+  // If config does not exist, but $IPFS_PATH/api exists, then
+  // it is a remote repository.
+  if (apiFileExists(ipfsd)) {
+    return { ipfsd, isRemote: true }
   }
 
   await ipfsd.init({
@@ -71,12 +77,12 @@ async function spawn ({ flags, path, keysize }) {
   })
 
   applyDefaults(ipfsd)
-  return ipfsd
+  return { ipfsd, isRemote: false }
 }
 
 module.exports = async function (opts) {
-  const ipfsd = await spawn(opts)
-  await checkPorts(ipfsd)
+  const { ipfsd, isRemote } = await spawn(opts)
+  if (!isRemote) await checkPorts(ipfsd)
 
   try {
     await ipfsd.start()

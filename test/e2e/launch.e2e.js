@@ -146,12 +146,9 @@ describe('Application launch', function () {
     expect(config.API.HTTPHeaders['Access-Control-Allow-Origin']).to.deep.equal(specificOrigins)
   })
 
-  /* TODO: support  for IPFS_PATH/api is broken ATM (was removed at some point?)
-
   it('starts with repository with "IPFS_PATH/api" file and no daemon running', async function () {
     // create "remote" repo
-    const { ipfsd, configPath: remoteConfigPath } = await makeRepository({ start: true })
-    const remoteConfig = fs.readJsonSync(remoteConfigPath)
+    const { ipfsd } = await makeRepository({ start: true })
 
     // create "local" repo
     const { repoPath, configPath } = await makeRepository({ start: false })
@@ -159,12 +156,13 @@ describe('Application launch', function () {
 
     // create IPFS_PATH/api file to point at remote node
     const apiPath = path.join(repoPath, 'api')
-    fs.writeFile(apiPath, remoteConfig.Addresses.API)
+    fs.writeFile(apiPath, ipfsd.apiAddr.toString())
+
     const { app } = await startApp({ repoPath })
     expect(app.isRunning()).to.be.true()
     await daemonReady(app)
     await ipfsd.stop()
-  }) */
+  })
 
   it('starts with multiple api addresses', async function () {
     const { repoPath, configPath } = await makeRepository({ start: false })
