@@ -1,4 +1,4 @@
-const { BrowserWindow, ipcMain, systemPreferences } = require('electron')
+const { BrowserWindow, ipcMain } = require('electron')
 const crypto = require('crypto')
 const { IS_MAC } = require('../common/consts')
 
@@ -43,8 +43,8 @@ function generatePage ({ title, message, placeholder = '', buttons }, id) {
       segoe ui,
       arial,sans-serif;
     padding: 1rem;
-    color: ${systemPreferences.isDarkMode() ? '#ffffff' : '#000000'};
-    background: ${systemPreferences.isDarkMode() ? '#333333' : '#f7f7f7'};
+    color: #000000;
+    background: #f7f7f7;
   }
   input {
     display: block;
@@ -67,6 +67,12 @@ function generatePage ({ title, message, placeholder = '', buttons }, id) {
   }
   button:last-of-type {
     background: #0b3a53;
+  }
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: #333333;
+      color: #ffffff;
+    }
   }
   </style>
   <script>
@@ -103,6 +109,10 @@ module.exports = async function showPrompt (options) {
     ipcMain.once(id, (_, data) => {
       window.close()
       resolve(data)
+    })
+
+    window.on('closed', () => {
+      resolve({ input: '', button: null })
     })
 
     window.once('ready-to-show', () => {
