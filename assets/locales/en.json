@@ -150,11 +150,11 @@
     "action": "Download"
   },
   "cantResolveCidDialog": {
-    "title": "Could not resolve",
+    "title": "Error",
     "message": "Unable to resolve \"{ path }\"."
   },
   "couldNotGetCidDialog": {
-    "title": "Could not fetch path",
+    "title": "Error",
     "message": "Unable to fetch \"{ path }\"."
   },
   "contentsSavedDialog": {
