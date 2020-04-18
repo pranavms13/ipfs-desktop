@@ -1,3 +1,5 @@
+const all = require('it-all')
+const concat = require('it-concat')
 const path = require('path')
 const fs = require('fs-extra')
 const i18n = require('i18next')
@@ -18,6 +20,15 @@ const SHORTCUT = IS_MAC
 async function saveFile (dir, file) {
   const location = path.join(dir, file.path)
   await fs.outputFile(location, file.content)
+}
+
+async function get (ipfs, cid) {
+  return all((async function * () {
+    for await (let { path, content } of ipfs.get(cid)) {
+      content = content ? (await concat(content)).toString() : null
+      yield { path, content }
+    }
+  })())
 }
 
 async function downloadHash (ctx) {
@@ -53,7 +64,7 @@ async function downloadHash (ctx) {
 
   try {
     logger.info(`[hash download] downloading ${text}: started`, { withAnalytics: 'DOWNLOAD_HASH' })
-    files = await ipfsd.api.get(text)
+    files = await get(ipfsd.api, text)
     logger.info(`[hash download] downloading ${text}: completed`)
   } catch (err) {
     logger.error(`[hash download] ${err.toString()}`)
