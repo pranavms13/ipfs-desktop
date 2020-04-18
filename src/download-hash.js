@@ -88,7 +88,11 @@ async function downloadHash (ctx) {
 }
 
 module.exports = function (ctx) {
-  setupGlobalShortcut(ctx, {
+  setupGlobalShortcut({
+    confirmationDialog: {
+      title: i18n.t('enableGlobalDownloadShortcut.title'),
+      message: i18n.t('enableGlobalDownloadShortcut.message', { accelerator: SHORTCUT })
+    },
     settingsOption: CONFIG_KEY,
     accelerator: SHORTCUT,
     action: () => {

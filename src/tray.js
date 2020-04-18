@@ -11,7 +11,7 @@ const runGarbageCollector = require('./run-gc')
 
 const { SHORTCUT: SCREENSHOT_SHORTCUT, CONFIG_KEY: SCREENSHOT_KEY, takeScreenshot } = require('./take-screenshot')
 const { SHORTCUT: HASH_SHORTCUT, CONFIG_KEY: HASH_KEY, downloadHash } = require('./download-hash')
-const { CONFIG_KEY: AUTO_LAUNCH_KEY } = require('./auto-launch')
+const { CONFIG_KEY: AUTO_LAUNCH_KEY, isSupported: supportsLaunchAtLogin } = require('./auto-launch')
 const { CONFIG_KEY: IPFS_PATH_KEY } = require('./ipfs-on-path')
 const { CONFIG_KEY: NPM_IPFS_KEY } = require('./npm-on-ipfs')
 
@@ -233,6 +233,8 @@ module.exports = function (ctx) {
 
   const updateStatus = data => {
     status = data
+
+    menu.getMenuItemById(AUTO_LAUNCH_KEY).enabled = supportsLaunchAtLogin()
 
     menu.getMenuItemById('ipfsIsStarting').visible = status === STATUS.STARTING_STARTED
     menu.getMenuItemById('ipfsIsRunning').visible = status === STATUS.STARTING_FINISHED
