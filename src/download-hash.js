@@ -28,11 +28,16 @@ async function getCID () {
   const { button, input } = await showPrompt({
     title: i18n.t('downloadCidContentDialog.title'),
     message: i18n.t('downloadCidContentDialog.message'),
-    placeholder: isIPFS.cid(text) ? text : '',
+    defaultValue: isIPFS.cid(text) ? text : '',
+    placeholder: 'QmHash...',
     buttons: [
       i18n.t('downloadCidContentDialog.action'),
       i18n.t('cancel')
-    ]
+    ],
+    window: {
+      width: 460,
+      height: 120
+    }
   })
 
   if (button !== 0) {
