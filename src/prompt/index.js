@@ -136,7 +136,9 @@ module.exports = async function showPrompt (options = {}) {
     show: false,
     width: 350,
     height: 330,
-    // resizable: false,
+    resizable: false,
+    autoHideMenuBar: true,
+    fullscreenable: false,
     webPreferences: {
       nodeIntegration: true
     },
