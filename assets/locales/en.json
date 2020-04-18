@@ -151,7 +151,7 @@
   },
   "cantResolveCidDialog": {
     "title": "Could not resolve",
-    "message": "The given path ({ path }) could not be resolved."
+    "message": "Unable to resolve \"{ path }\"."
   },
   "couldNotGetCidDialog": {
     "title": "Could not fetch path",
