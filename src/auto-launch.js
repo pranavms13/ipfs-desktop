@@ -47,7 +47,7 @@ async function disable () {
   await fs.remove(getDesktopFile())
 }
 
-module.exports = async function (ctx) {
+module.exports = async function () {
   const activate = async (value, oldValue) => {
     if (process.env.NODE_ENV === 'development') {
       logger.info('[launch on startup] unavailable during development')
@@ -78,5 +78,7 @@ module.exports = async function (ctx) {
   }
 
   activate(store.get(CONFIG_KEY, false))
-  createToggler(ctx, CONFIG_KEY, activate)
+  createToggler(CONFIG_KEY, activate)
 }
+
+module.exports.CONFIG_KEY = CONFIG_KEY

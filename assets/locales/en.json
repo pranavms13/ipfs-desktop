@@ -16,7 +16,6 @@
   "readReleaseNotes": "Read Release Notes",
   "status": "Status",
   "files": "Files",
-  "settings": "Settings",
   "quit": "Quit",
   "versions": "Versions",
   "screenshotTaken": "Screenshot taken",
@@ -150,5 +149,15 @@
   "cantAddIpfsToPath": {
     "title": "IPFS on PATH",
     "message": "Could not add IPFS to the PATH."
+  },
+  "settings": {
+    "settings": "Settings",
+    "preferences": "Preferences",
+    "launchOnStartup": "Enable Launch at Login",
+    "ipfsCommandLineTools": "Enable Command Line Tools",
+    "takeScreenshotShortcut": "Enable Take Screenshot Shortcut",
+    "downloadHashShortcut": "Enable Download Hash Shortcut",
+    "experiments": "Experiments",
+    "npmOnIpfs": "Enable npm on IPFS"
   }
 }

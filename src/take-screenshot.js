@@ -115,3 +115,4 @@ module.exports = function (ctx) {
 
 module.exports.takeScreenshot = takeScreenshot
 module.exports.SHORTCUT = SHORTCUT
+module.exports.CONFIG_KEY = CONFIG_KEY
