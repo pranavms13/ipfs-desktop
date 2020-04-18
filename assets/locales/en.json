@@ -155,7 +155,7 @@
   },
   "couldNotGetCidDialog": {
     "title": "Could not fetch path",
-    "message": "The given path ({ path }) could not be fetched."
+    "message": "Unable to fetch \"{ path }\"."
   },
   "contentsSavedDialog": {
     "title": "Contents saved",
