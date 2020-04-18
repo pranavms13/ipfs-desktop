@@ -44,6 +44,7 @@
   "downloadHash": "Download Hash",
   "moveRepositoryLocation": "Move Repository Location",
   "runGarbageCollector": "Run Garbage Collector",
+  "customIpfsBinary": "Custom IPFS Binary",
   "setCustomIpfsBinary": "Set Custom IPFS Binary",
   "clearCustomIpfsBinary": "Clear Custom IPFS Binary",
   "polkitDialog": {

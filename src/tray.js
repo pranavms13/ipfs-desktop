@@ -131,7 +131,9 @@ function buildMenu (ctx) {
           click: () => { shell.openExternal('https://github.com/ipfs-shipyard/ipfs-desktop/releases') }
         },
         {
-          label: `go-ipfs ${hasCustomBinary() ? '(custom)' : GO_IPFS_VERSION}`,
+          label: hasCustomBinary()
+            ? i18n.t('customIpfsBinary')
+            : `go-ipfs ${GO_IPFS_VERSION}`,
           click: () => { shell.openExternal('https://github.com/ipfs/go-ipfs/releases') }
         },
         { type: 'separator' },
