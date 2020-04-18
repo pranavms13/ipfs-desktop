@@ -35,7 +35,7 @@
   "restartIpfsDesktop": "Restart IPFS Desktop",
   "openLogs": "Open logs",
   "takeScreenshot": "Take Screenshot",
-  "downloadHash": "Download CID",
+  "downloadHash": "Download...",
   "moveRepositoryLocation": "Move Repository Location",
   "runGarbageCollector": "Run Garbage Collector",
   "polkitDialog": {
