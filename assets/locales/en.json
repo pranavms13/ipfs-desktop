@@ -159,7 +159,7 @@
   },
   "contentsSavedDialog": {
     "title": "Success",
-    "message": "The contents from the given path ({ path }) were successfully saved.",
+    "message": "The contents of \"{ path }\" were successfully downloaded.",
     "action": "See Files"
   },
   "couldNotSaveDialog": {
