@@ -39,6 +39,7 @@ function generatePage ({ message, defaultValue = '', placeholder = 'Type here...
     margin: 0;
     padding: 0;
     font-size: 14px;
+    overflow: hidden;
   }
   body {
     -webkit-font-smoothing: antialiased;
