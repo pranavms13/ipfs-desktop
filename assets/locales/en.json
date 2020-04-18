@@ -158,7 +158,7 @@
     "message": "Unable to fetch \"{ path }\"."
   },
   "contentsSavedDialog": {
-    "title": "Contents saved",
+    "title": "Success",
     "message": "The contents from the given path ({ path }) were successfully saved.",
     "action": "See Files"
   },
